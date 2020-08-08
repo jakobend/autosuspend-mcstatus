@@ -18,7 +18,7 @@ class ServerOnline(Activity, MCStatusMixin):
         self.logger.debug("Sending SLP to {}".format(self._address))
 
         try:
-            self._server.ping(retries=self._retries)
+            self._server.ping(tries=self._retries)
             return "Server is online"
         except socket.timeout as error:
             pass
@@ -45,7 +45,7 @@ class PlayersOnline(Activity, MCStatusMixin):
         self.logger.debug("Sending SLP to {}".format(self._address))
 
         try:
-            status = self._server.status(retries=self._retries)
+            status = self._server.status(tries=self._retries)
             if status.players.online > self._treshold:
                 return "{} players online on {}".format(
                     status.players.online,
